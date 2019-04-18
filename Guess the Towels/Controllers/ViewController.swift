@@ -27,7 +27,7 @@ class ViewController: UIViewController {
     var towelNumber:Int = 0
     var score:Int = 0
     var selectedAnswer:String = ""
-    var continent:String = "Europe"
+    static var continent:String = "Europe"
     
     
     override func viewDidLoad() {
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     
     //Updates the UI
     func updateUI(){
-        continentLabel.text = "This country is located in \(self.continent)"
+        continentLabel.text = "This country is located in \(ViewController.continent)"
         scoreLabel.text = "Score: \(score)"
         progressLabel.text = "\(towelNumber + 1)/\(allTowels.list.count)"
         progressBar.frame.size.width = (view.frame.size.width / CGFloat(allTowels.list.count)) * CGFloat(towelNumber + 1)
@@ -99,33 +99,7 @@ class ViewController: UIViewController {
         self.present(next, animated: true, completion: nil)
     }
     
-    //Datatask
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
     
-    //The continent of the next flag is set using an API.
-    //By giving the name of the flag, the Restful Flag API returns various parameters
-    //In this app we get the region (continent) of the nation, to show as a hint
-    func setContinent(from url: URL) {
-        getData(from: url) { data, response, error in
-            guard let dataResponse = data,
-                error == nil else {
-                    return }
-            do{
-                let jsonResponse = try JSONSerialization.jsonObject(with:
-                    dataResponse, options: [])
-                
-                guard let jsonArray = jsonResponse as? [[String: Any]] else {
-                    return
-                }
-                //set continent for current flag
-                self.continent = jsonArray[0]["region"] as! String
-            } catch let parsingError {
-                print("Parsing error!", parsingError)
-            }
-        }
-        }
     }
     
     
