@@ -31,35 +31,39 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         updateTowel()
         updateUI()
+        //Set a flag and starting score on viewloaded.
         }
     
     @IBAction func answerClicked(_ sender: UIButton) {
         if sender.accessibilityLabel == selectedAnswer {
-            print("correct!")
             score += 1
-        }else{
-            print("incorrect!")
+            //If the correct answer is chosen, add a point
         }
         towelNumber += 1
         updateTowel()
+        //Trigged function which sets a new flag (towel) to guess with its answers.
     }
     
     func updateTowel(){
         if towelNumber <= allTowels.list.count - 1
         {
             let url:URL = URL(string: "https://restcountries.eu/data/" + allTowels.list[towelNumber].towel)!
-            downloadImage(from: url)
+            downloadImage(from: url) // Using the api, get a flag image source, and set this in the imageContainer for flags.
             buttonA.setTitle(allTowels.list[towelNumber].buttonA, for: UIControl.State.normal)
             buttonB.setTitle(allTowels.list[towelNumber].buttonB, for: UIControl.State.normal)
             buttonC.setTitle(allTowels.list[towelNumber].buttonC, for: UIControl.State.normal)
             selectedAnswer = allTowels.list[towelNumber].correctAnswer
+            // Also set 3 new choice options, and set which one is correct and will give a point.
         }
         else
         {
             let alert = UIAlertController(title: "Done!", message: "Quiz finished! Go again?", preferredStyle: .alert)
             let restartAction = UIAlertAction(title: "Restart", style: .default, handler: {action in self.restartQuiz()})
+            let scoreAction = UIAlertAction(title: "Scorescreen", style: .default, handler: {action in self.scoreScreen()})
             alert.addAction(restartAction)
+            alert.addAction(scoreAction)
             present(alert, animated: true, completion: nil)
+            //If we run out of question, prompt the user what to do. Go to the scorescreen, or restart?
         }
         updateUI()
     }
@@ -76,16 +80,19 @@ class ViewController: UIViewController {
         updateTowel()
     }
     
+    func scoreScreen() {
+        let next = self.storyboard?.instantiateViewController(withIdentifier: "ScoreViewController") as! ScoreViewController
+        self.present(next, animated: true, completion: nil)
+    }
+    
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
     func downloadImage(from url: URL) {
-        print("Download Started")
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
             DispatchQueue.main.async() {
                 self.towelView.image = UIImage(data: data)
             }

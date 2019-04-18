@@ -14,9 +14,8 @@ class TowelList{
     init() {
         list.append(Towel(image: "nld.svg", continent: "europe", a: "France", b: "Netherlands", c: "India", answer: "b"))
         list.append(Towel(image: "ita.svg", continent: "europe", a: "Egypt", b: "Hungary", c: "Italy", answer: "c"))
-//        list.append(Towel(image: "germany", continent: "europe", a: "Germany", b: "Belgium", c: "Ukraine", answer: "a"))
-//        list.append(Towel(image: "japan", continent: "asia", a: "China", b: "Thailand", c: "Japan", answer: "c"))
-//        list.append(Towel(image: "china", continent: "asia", a: "China", b: "Thailand", c: "Japan", answer: "a"))
-        
-    }
+        list.append(Towel(image: "due.svg", continent: "europe", a: "Germany", b: "Belgium", c: "Ukraine", answer: "a"))
+        list.append(Towel(image: "jpn.svg", continent: "asia", a: "China", b: "Thailand", c: "Japan", answer: "c"))
+        list.append(Towel(image: "chn.svg", continent: "asia", a: "China", b: "Thailand", c: "Japan", answer: "a"))
+        }
 }

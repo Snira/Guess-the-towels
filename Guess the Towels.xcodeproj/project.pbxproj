@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14094AE52264D4ED00AC2DA6 /* GetJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14094AE42264D4ED00AC2DA6 /* GetJSON.swift */; };
 		149B3C2C2263ADB900217DE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B3C2B2263ADB900217DE4 /* AppDelegate.swift */; };
 		149B3C2E2263ADB900217DE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B3C2D2263ADB900217DE4 /* ViewController.swift */; };
 		149B3C312263ADB900217DE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149B3C2F2263ADB900217DE4 /* Main.storyboard */; };
@@ -15,10 +14,10 @@
 		149B3C362263ADBA00217DE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149B3C342263ADBA00217DE4 /* LaunchScreen.storyboard */; };
 		149B3C3E2263ADFE00217DE4 /* Towel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149B3C3D2263ADFE00217DE4 /* Towel.swift */; };
 		14FC38F8226863F9007D91A4 /* TowelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FC38F7226863F9007D91A4 /* TowelList.swift */; };
+		14FC38FE226887E6007D91A4 /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FC38FD226887E6007D91A4 /* ScoreViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14094AE42264D4ED00AC2DA6 /* GetJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetJSON.swift; sourceTree = "<group>"; };
 		149B3C282263ADB900217DE4 /* Guess the Towels.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guess the Towels.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		149B3C2B2263ADB900217DE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149B3C2D2263ADB900217DE4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -28,6 +27,7 @@
 		149B3C372263ADBA00217DE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		149B3C3D2263ADFE00217DE4 /* Towel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Towel.swift; sourceTree = "<group>"; };
 		14FC38F7226863F9007D91A4 /* TowelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TowelList.swift; sourceTree = "<group>"; };
+		14FC38FD226887E6007D91A4 /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +74,7 @@
 			children = (
 				149B3C2B2263ADB900217DE4 /* AppDelegate.swift */,
 				149B3C2D2263ADB900217DE4 /* ViewController.swift */,
+				14FC38FD226887E6007D91A4 /* ScoreViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -91,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				149B3C3D2263ADFE00217DE4 /* Towel.swift */,
-				14094AE42264D4ED00AC2DA6 /* GetJSON.swift */,
 				14FC38F7226863F9007D91A4 /* TowelList.swift */,
 			);
 			path = Models;
@@ -170,7 +170,7 @@
 			files = (
 				149B3C3E2263ADFE00217DE4 /* Towel.swift in Sources */,
 				149B3C2E2263ADB900217DE4 /* ViewController.swift in Sources */,
-				14094AE52264D4ED00AC2DA6 /* GetJSON.swift in Sources */,
+				14FC38FE226887E6007D91A4 /* ScoreViewController.swift in Sources */,
 				149B3C2C2263ADB900217DE4 /* AppDelegate.swift in Sources */,
 				14FC38F8226863F9007D91A4 /* TowelList.swift in Sources */,
 			);
