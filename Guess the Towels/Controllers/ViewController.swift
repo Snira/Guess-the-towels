@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var towelView: UIImageView!
+    @IBOutlet weak var continentLabel: UILabel!
     @IBOutlet weak var progressBar: UIView!
     @IBOutlet weak var progressLabel: UILabel!
     
@@ -24,13 +25,15 @@ class ViewController: UIViewController {
     var towelNumber:Int = 0
     var score:Int = 0
     var selectedAnswer:String = ""
+    var continent:String = ""
     
     
     override func viewDidLoad() {
        
         super.viewDidLoad()
+        
         updateTowel()
-        updateUI()
+        
         //Set a flag and starting score on viewloaded.
         }
     
@@ -47,8 +50,10 @@ class ViewController: UIViewController {
     func updateTowel(){
         if towelNumber <= allTowels.list.count - 1
         {
-            let url:URL = URL(string: "https://restcountries.eu/data/" + allTowels.list[towelNumber].towel)!
-            downloadImage(from: url) // Using the api, get a flag image source, and set this in the imageContainer for flags.
+            let url:URL = URL(string: "https://restcountries.eu/rest/v2/name/" + allTowels.list[towelNumber].towel)!
+            //Set a continent from the api url based on which nation the flag is from.
+            setContinent(from: url)
+            towelView.image = UIImage(named: allTowels.list[towelNumber].towel)
             buttonA.setTitle(allTowels.list[towelNumber].buttonA, for: UIControl.State.normal)
             buttonB.setTitle(allTowels.list[towelNumber].buttonB, for: UIControl.State.normal)
             buttonC.setTitle(allTowels.list[towelNumber].buttonC, for: UIControl.State.normal)
@@ -69,6 +74,7 @@ class ViewController: UIViewController {
     }
     
     func updateUI(){
+        continentLabel.text = "This country is located in \(self.continent)"
         scoreLabel.text = "Score: \(score)"
         progressLabel.text = "\(towelNumber + 1)/\(allTowels.list.count)"
         progressBar.frame.size.width = (view.frame.size.width / CGFloat(allTowels.list.count)) * CGFloat(towelNumber + 1)
@@ -82,6 +88,7 @@ class ViewController: UIViewController {
     
     func scoreScreen() {
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ScoreViewController") as! ScoreViewController
+        next.self.score = score
         self.present(next, animated: true, completion: nil)
     }
     
@@ -89,17 +96,28 @@ class ViewController: UIViewController {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func downloadImage(from url: URL) {
+    func setContinent(from url: URL) {
         getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            DispatchQueue.main.async() {
-                self.towelView.image = UIImage(data: data)
+            guard let dataResponse = data,
+                error == nil else {
+                    return }
+            do{
+                let jsonResponse = try JSONSerialization.jsonObject(with:
+                    dataResponse, options: [])
+                
+                guard let jsonArray = jsonResponse as? [[String: Any]] else {
+                    return
+                }
+                //set continent for current flag
+                self.continent = jsonArray[0]["region"] as! String
+            } catch let parsingError {
+                print("Parsing error!", parsingError)
             }
+        }
         }
     }
     
     
     
- }
+
 
