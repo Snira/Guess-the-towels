@@ -20,28 +20,30 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonB: UIButton!
     @IBOutlet weak var buttonC: UIButton!
     
-    
+    //List of the questions asked
     let allTowels = TowelList()
+    
+    //Variable properties
     var towelNumber:Int = 0
     var score:Int = 0
     var selectedAnswer:String = ""
-    var continent:String = ""
+    var continent:String = "Europe"
     
     
     override func viewDidLoad() {
-       
         super.viewDidLoad()
-        
-        updateTowel()
-        
         //Set a flag and starting score on viewloaded.
+        updateTowel()
+        updateUI()
         }
     
+    //Action for when answer clicked.
     @IBAction func answerClicked(_ sender: UIButton) {
         if sender.accessibilityLabel == selectedAnswer {
             score += 1
             //If the correct answer is chosen, add a point
         }
+        //Go to the next flag
         towelNumber += 1
         updateTowel()
         //Trigged function which sets a new flag (towel) to guess with its answers.
@@ -50,9 +52,11 @@ class ViewController: UIViewController {
     func updateTowel(){
         if towelNumber <= allTowels.list.count - 1
         {
-            let url:URL = URL(string: "https://restcountries.eu/rest/v2/name/" + allTowels.list[towelNumber].towel)!
+            if towelNumber < allTowels.list.count - 1 {
+            let url:URL = URL(string: "https://restcountries.eu/rest/v2/name/" + allTowels.list[towelNumber+1].towel)!
             //Set a continent from the api url based on which nation the flag is from.
             setContinent(from: url)
+            }
             towelView.image = UIImage(named: allTowels.list[towelNumber].towel)
             buttonA.setTitle(allTowels.list[towelNumber].buttonA, for: UIControl.State.normal)
             buttonB.setTitle(allTowels.list[towelNumber].buttonB, for: UIControl.State.normal)
@@ -73,6 +77,7 @@ class ViewController: UIViewController {
         updateUI()
     }
     
+    //Updates the UI
     func updateUI(){
         continentLabel.text = "This country is located in \(self.continent)"
         scoreLabel.text = "Score: \(score)"
@@ -80,22 +85,28 @@ class ViewController: UIViewController {
         progressBar.frame.size.width = (view.frame.size.width / CGFloat(allTowels.list.count)) * CGFloat(towelNumber + 1)
     }
     
+    //Restarts the quiz
     func restartQuiz(){
         score = 0
         towelNumber = 0
         updateTowel()
     }
     
+    //Go to the view to save or view scores
     func scoreScreen() {
         let next = self.storyboard?.instantiateViewController(withIdentifier: "ScoreViewController") as! ScoreViewController
         next.self.score = score
         self.present(next, animated: true, completion: nil)
     }
     
+    //Datatask
     func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
+    //The continent of the next flag is set using an API.
+    //By giving the name of the flag, the Restful Flag API returns various parameters
+    //In this app we get the region (continent) of the nation, to show as a hint
     func setContinent(from url: URL) {
         getData(from: url) { data, response, error in
             guard let dataResponse = data,

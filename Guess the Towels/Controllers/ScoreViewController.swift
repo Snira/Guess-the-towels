@@ -19,11 +19,14 @@ class ScoreViewController: UIViewController {
     }
     
     @IBAction func saveClicked(_ sender: UIButton) {
-        let defaults = UserDefaults.standard
-        print(score)
-        //Set
-        defaults.set(score, forKey: "Score")
-        //Get
+        //Saves score of this quiz.
+        UserDefaults.standard.set(self.score, forKey: "score")
+     }
+    
+    @IBAction func showLastScore(_ sender: UIButton){
+        //Prints score of quiz last saved.
+        let lastScore = UserDefaults.standard.object(forKey: "score")
+        print(lastScore)
     }
     
     

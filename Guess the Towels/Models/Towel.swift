@@ -9,17 +9,16 @@
 import Foundation
 import UIKit
 
+//"Towel" is a synonym for flag used in this application.
 class Towel {
     let towel:String
-    let region:String
     let buttonA:String
     let buttonB:String
     let buttonC:String
     let correctAnswer:String
  
-    init(image: String, continent:String, a: String, b:String, c: String, answer: String) {
+    init(image: String, a: String, b:String, c: String, answer: String) {
         towel = image
-        region = continent
         buttonA = a
         buttonB = b
         buttonC = c
