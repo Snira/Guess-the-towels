@@ -24,7 +24,6 @@ class Towel {
         buttonB = b
         buttonC = c
         correctAnswer = answer
-        
     }
 }
 

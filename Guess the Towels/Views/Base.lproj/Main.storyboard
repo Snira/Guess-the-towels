@@ -120,6 +120,7 @@
                         <outlet property="buttonC" destination="BcV-Xv-Ocn" id="emO-xj-gko"/>
                         <outlet property="progressBar" destination="IsA-8I-Mvn" id="S7E-MQ-ccu"/>
                         <outlet property="progressLabel" destination="iPN-AW-HNY" id="LUF-BN-1n8"/>
+                        <outlet property="scoreLabel" destination="DoP-FQ-9PE" id="era-nC-23U"/>
                         <outlet property="towelView" destination="alF-Ab-j40" id="5G5-4b-K8v"/>
                     </connections>
                 </viewController>

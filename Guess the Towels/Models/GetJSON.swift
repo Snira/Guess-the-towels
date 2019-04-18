@@ -36,7 +36,7 @@ func fetchData (){
                 for item in parsedData
                 {
                     
-                    print(item["flag"])
+                    print(item[""])
                     
                     
                 }
